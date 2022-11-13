@@ -42,7 +42,8 @@ const googleSignInHandler = () => {
     <AuthLayout title='Login'>
 
 
-      <form onSubmit={ submitHandler }>
+      <form onSubmit={ submitHandler }     className='animate__animated animate__fadeIn animate__faster'
+>
 
         <Grid container>
           <Grid item xs={ 12 } sx={{ mt: 3}}>
