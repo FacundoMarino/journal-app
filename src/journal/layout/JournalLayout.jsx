@@ -6,7 +6,8 @@ const draweWidth = 240;
 
 export const JournalLayout = ({ children }) => {
   return (
-   <Box sx={{ display: 'flex' }}      className='animate__animated animate__fadeIn animate__faster'
+   <Box sx={{ display: 'flex' }}
+       className='animate__animated animate__fadeIn animate__faster'
    >
 
 
@@ -22,7 +23,7 @@ export const JournalLayout = ({ children }) => {
 
     <Toolbar />
 
-    { children }
+      { children }
 
     </Box>
 

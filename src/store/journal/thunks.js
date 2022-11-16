@@ -1,6 +1,7 @@
 import { collection, doc, setDoc } from "firebase/firestore/lite";
 import { FirebaseDB } from "../../firebase/config";
-import { addNewEmptyNote, savingNote  } from "./journalSlice";
+import { loadNotes } from "../../helpers/loadNotes";
+import { addNewEmptyNote, savingNote, setActiveNote, setNotes, setSaving  } from "./journalSlice";
 
 export const startNewNote = () => {
 
@@ -25,4 +26,37 @@ export const startNewNote = () => {
         dispatch( addNewEmptyNote( newNote ) )
         dispatch( setActiveNote( newNote ) )
     } 
+}
+
+export const startLoadingNotes = () => {
+    return async( dispatch, getState ) =>{
+
+    const { uid } = getState().auth;
+    
+    if( !uid ) throw new Error('El UID del usuario no existe');
+
+    const respNotes = await loadNotes( uid );
+
+    dispatch( setNotes( respNotes ) )
+    }
+}
+
+export const startSaveNote = () => {
+
+    return async( dispatch, getState ) => {
+
+    dispatch( setSaving() )
+
+    const { uid } = getState().auth;
+    const { active } = getState().journal
+
+    const noteFireStore = { ...active }
+    delete noteFireStore.id
+
+    const docRef = doc( FirebaseDB, `${ uid }/journal/notes/${ active.id }` )
+    await setDoc( docRef, noteFireStore, { merge: true} )
+
+    dispatch( updateNote() )
+
+    }
 }
