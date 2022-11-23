@@ -5,6 +5,7 @@ export const JournalRoutes = () => {
   return (
     <div>
         <Routes>
+          
             <Route path="/" element={ <JournalPage /> } />
 
             <Route path="/*" element={ <Navigate to="/" /> } />
