@@ -1,8 +1,8 @@
 
 
 export const fileUpload = async( file ) => {
-    
-    if( !file) throw new Error('No contiene ningún archivo');
+
+    if( !file ) return null;
 
     const cloudUrl = 'https://api.cloudinary.com/v1_1/ddnmi4trb/upload';
 
@@ -24,9 +24,7 @@ export const fileUpload = async( file ) => {
 
     } catch (error) {
 
-        console.log(error)
-        throw new Error( error.message )
-        
+        return null;
     }
     
 
