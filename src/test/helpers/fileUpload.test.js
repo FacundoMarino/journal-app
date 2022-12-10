@@ -22,6 +22,16 @@ describe('Pruebas en fileUpload', () => {
         const url = await fileUpload( file );
         expect( typeof url ).toBe('string');
 
+
+        const segment = url.split('/');
+        const imageId = segment[ segment.length - 1 ].replace('.jpg', '');
+
+        const cloudResp = await cloudinary.api.delete_resources([ 'journal-app/' + imageId, { 
+            resource_type: 'image'
+        } 
+    ]);
+
+
     })
 
     test('Debe retornar null', async() => {
